@@ -68,7 +68,7 @@
       <HintPath>..\..\lib\references\Microsoft\Microsoft.Web.Administration.dll</HintPath>
     </Reference>
     <Reference Include="roundhouse">
-      <HintPath>..\..\lib\references\roundhouse\roundhouse.dll</HintPath>
+      <HintPath>..\..\..\..\roundhouse\build\RoundhousE\lib\roundhouse.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
