@@ -70,8 +70,8 @@ namespace dropkick.Tasks.RoundhousE
                         p.WarnOnOneTimeScriptChanges = warnOnOneTimeScriptChanges.Value;
                     }
 
-                	p.RunAfterOtherAnytimeScriptsFolderName = runAfterOtherAnytimeScriptsFolderName;
-                	p.RunAfterCreateDatabaseScriptsFolderName = runAfterCreateDatabaseScriptsFolderName;
+                	p.RunAfterOtherAnyTimeScriptsFolderName = runAfterOtherAnytimeScriptsFolderName;
+                	p.RunAfterCreateDatabaseFolderName = runAfterCreateDatabaseScriptsFolderName;
 
                     p.Silent = true;
                 })
