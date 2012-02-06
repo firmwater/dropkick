@@ -48,6 +48,8 @@ namespace dropkick.Configuration.Dsl.RoundhousE
         private string _sprocsFolderName;
         private string _viewsFolderName;
         private string _upFolderName;
+    	private string _runAfterOtherAnytimeScriptsFolderName;
+    	private string _runAfterCreateDatabaseScriptsFolderName;
         private string _versionTable;
         private string _scriptsRunTable;
         private string _scriptsRunErrorTable;
@@ -100,6 +102,18 @@ namespace dropkick.Configuration.Dsl.RoundhousE
             _upFolderName = ReplaceTokens(upFolderName);
             return this;
         }
+
+		public RoundhousEOptions WithRunAfterOtherAnytimeScripts(string runAfterOtherAnytimeScriptsFolderName)
+		{
+			_runAfterOtherAnytimeScriptsFolderName = ReplaceTokens(runAfterOtherAnytimeScriptsFolderName);
+			return this;
+		}
+
+		public RoundhousEOptions WithRunAfterCreateDatabaseScriptsFolderNameFolder(string runAfterCreateDatabaseScriptsFolderName)
+		{
+			_runAfterCreateDatabaseScriptsFolderName = ReplaceTokens(runAfterCreateDatabaseScriptsFolderName);
+			return this;
+		}
 
         public RoundhousEOptions WithVersionTable(string versionTable)
         {
@@ -220,7 +234,8 @@ namespace dropkick.Configuration.Dsl.RoundhousE
                 _recoveryMode, _restorePath, _restoreTimeout, _restoreCustomOptions,
                 _repositoryPath, _versionFile, _versionXPath, _commandTimeout, _commandTimeoutAdmin,
                 _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName,
-                _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges);
+                _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges,
+				_runAfterOtherAnytimeScriptsFolderName, _runAfterCreateDatabaseScriptsFolderName);
 
             site.AddTask(task);
         }
