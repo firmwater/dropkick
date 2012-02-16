@@ -37,6 +37,7 @@ namespace dropkick.Configuration.Dsl.RoundhousE
         RoundhousEOptions WithSprocsFolder(string sprocsFolderName);
         RoundhousEOptions WithViewsFolder(string viewsFolderName);
 		RoundhousEOptions WithUpFolder(string upFolderName);
+        RoundhousEOptions WithRunBeforeUpFolder(string runBeforeUpFolderName);
 		RoundhousEOptions WithRunAfterOtherAnytimeScripts(string runAfterOtherAnytimeScriptsFolderName);
 		RoundhousEOptions WithRunAfterCreateDatabaseScriptsFolderNameFolder(string runAfterCreateDatabaseScriptsFolderName);
         RoundhousEOptions WithVersionTable(string versionTable);

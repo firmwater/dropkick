@@ -43,13 +43,14 @@ namespace dropkick.Tasks.RoundhousE
         private readonly string _upFolderName;
     	private readonly string _runAfterOtherAnytimeScriptsFolderName;
     	private readonly string _runAfterCreateDatabaseScriptsFolderName;
+        private readonly string _runBeforeUpFolderName;        
         private readonly string _scriptsRunTable;
         private readonly string _scriptsRunErrorTable;
         private readonly bool? _warnOnOneTimeScriptChanges;
         private readonly string _versionTable;
         private readonly string _outputPath;
 
-        public RoundhousETask(DbConnectionInfo connectionInfo, string scriptsLocation, string environmentName, RoundhousEMode roundhouseMode, DatabaseRecoveryMode recoveryMode, string restorePath, int restoreTimeout, string restoreCustomOptions, string repositoryPath, string versionFile, string versionXPath, int commandTimeout, int commandTimeoutAdmin, string functionsFolderName, string sprocsFolderName, string viewsFolderName, string upFolderName, string versionTable, string scriptsRunTable, string scriptsRunErrorTable, bool? warnOnOneTimeScriptChanges, string runAfterOtherAnytimeScriptsFolderName, string runAfterCreateDatabaseScriptsFolderName, string outputPath)
+        public RoundhousETask(DbConnectionInfo connectionInfo, string scriptsLocation, string environmentName, RoundhousEMode roundhouseMode, DatabaseRecoveryMode recoveryMode, string restorePath, int restoreTimeout, string restoreCustomOptions, string repositoryPath, string versionFile, string versionXPath, int commandTimeout, int commandTimeoutAdmin, string functionsFolderName, string sprocsFolderName, string viewsFolderName, string upFolderName, string runBeforeUpFolderName, string versionTable, string scriptsRunTable, string scriptsRunErrorTable, bool? warnOnOneTimeScriptChanges, string runAfterOtherAnytimeScriptsFolderName, string runAfterCreateDatabaseScriptsFolderName, string outputPath)
         {
             _connectionInfo = connectionInfo;
             _scriptsLocation = scriptsLocation;
@@ -70,6 +71,7 @@ namespace dropkick.Tasks.RoundhousE
             _upFolderName = upFolderName;
         	_runAfterOtherAnytimeScriptsFolderName = runAfterOtherAnytimeScriptsFolderName;
         	_runAfterCreateDatabaseScriptsFolderName = runAfterCreateDatabaseScriptsFolderName;
+            _runBeforeUpFolderName = runBeforeUpFolderName;
             _versionTable = versionTable;
             _scriptsRunTable = scriptsRunTable;
             _scriptsRunErrorTable = scriptsRunErrorTable;
@@ -118,16 +120,16 @@ namespace dropkick.Tasks.RoundhousE
                 switch (_roundhouseMode)
                 {
                     case RoundhousEMode.Drop:
-                        RoundhousEClientApi.Run(connectionString, scriptsPath, _environmentName, true, useSimpleRecovery, _repositoryPath, _versionFile, _versionXPath, _commandTimeout, _commandTimeoutAdmin, _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName, _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges, _runAfterOtherAnytimeScriptsFolderName, _runAfterCreateDatabaseScriptsFolderName, _outputPath);
+                        RoundhousEClientApi.Run(connectionString, scriptsPath, _environmentName, true, useSimpleRecovery, _repositoryPath, _versionFile, _versionXPath, _commandTimeout, _commandTimeoutAdmin, _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName, _runBeforeUpFolderName, _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges, _runAfterOtherAnytimeScriptsFolderName, _runAfterCreateDatabaseScriptsFolderName, _outputPath);
                         break;
                     case RoundhousEMode.Restore:
-                        RoundhousEClientApi.Run(connectionString, scriptsPath, _environmentName, false, useSimpleRecovery, _repositoryPath, _versionFile, _versionXPath, _commandTimeout, _commandTimeoutAdmin, true, _restorePath, _restoreTimeout, _restoreCustomOptions, _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName, _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges, _runAfterOtherAnytimeScriptsFolderName, _runAfterCreateDatabaseScriptsFolderName, _outputPath);
+                        RoundhousEClientApi.Run(connectionString, scriptsPath, _environmentName, false, useSimpleRecovery, _repositoryPath, _versionFile, _versionXPath, _commandTimeout, _commandTimeoutAdmin, true, _restorePath, _restoreTimeout, _restoreCustomOptions, _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName, _runBeforeUpFolderName, _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges, _runAfterOtherAnytimeScriptsFolderName, _runAfterCreateDatabaseScriptsFolderName, _outputPath);
                         break;
                     case RoundhousEMode.DropCreate:
-                        RoundhousEClientApi.Run(connectionString, @".\", _environmentName, true, useSimpleRecovery, _repositoryPath, _versionFile, _versionXPath, _commandTimeout, _commandTimeoutAdmin, _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName, _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges, _runAfterOtherAnytimeScriptsFolderName, _runAfterCreateDatabaseScriptsFolderName, _outputPath);
+                        RoundhousEClientApi.Run(connectionString, @".\", _environmentName, true, useSimpleRecovery, _repositoryPath, _versionFile, _versionXPath, _commandTimeout, _commandTimeoutAdmin, _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName, _runBeforeUpFolderName, _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges, _runAfterOtherAnytimeScriptsFolderName, _runAfterCreateDatabaseScriptsFolderName, _outputPath);
                         goto case RoundhousEMode.Normal;
                     case RoundhousEMode.Normal:
-                        RoundhousEClientApi.Run(connectionString, scriptsPath, _environmentName, false, useSimpleRecovery, _repositoryPath, _versionFile, _versionXPath, _commandTimeout, _commandTimeoutAdmin, _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName, _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges, _runAfterOtherAnytimeScriptsFolderName, _runAfterCreateDatabaseScriptsFolderName, _outputPath);
+                        RoundhousEClientApi.Run(connectionString, scriptsPath, _environmentName, false, useSimpleRecovery, _repositoryPath, _versionFile, _versionXPath, _commandTimeout, _commandTimeoutAdmin, _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName, _runBeforeUpFolderName, _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges, _runAfterOtherAnytimeScriptsFolderName, _runAfterCreateDatabaseScriptsFolderName, _outputPath);
                         break;
                     default:
                         goto case RoundhousEMode.Normal;

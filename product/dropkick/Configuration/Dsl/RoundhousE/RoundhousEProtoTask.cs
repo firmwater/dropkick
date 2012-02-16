@@ -48,6 +48,7 @@ namespace dropkick.Configuration.Dsl.RoundhousE
         private string _sprocsFolderName;
         private string _viewsFolderName;
         private string _upFolderName;
+        private string _runBeforeUpFolderName;
     	private string _runAfterOtherAnytimeScriptsFolderName;
     	private string _runAfterCreateDatabaseScriptsFolderName;
         private string _versionTable;
@@ -101,6 +102,12 @@ namespace dropkick.Configuration.Dsl.RoundhousE
         public RoundhousEOptions WithUpFolder(string upFolderName)
         {
             _upFolderName = ReplaceTokens(upFolderName);
+            return this;
+        }
+
+        public RoundhousEOptions WithRunBeforeUpFolder(string runBeforeUpFolderName)
+        {
+            _runBeforeUpFolderName = ReplaceTokens(runBeforeUpFolderName);
             return this;
         }
 
@@ -240,7 +247,7 @@ namespace dropkick.Configuration.Dsl.RoundhousE
                 _environmentName, _roundhouseMode,
                 _recoveryMode, _restorePath, _restoreTimeout, _restoreCustomOptions,
                 _repositoryPath, _versionFile, _versionXPath, _commandTimeout, _commandTimeoutAdmin,
-                _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName,
+                _functionsFolderName, _sprocsFolderName, _viewsFolderName, _upFolderName, _runBeforeUpFolderName,
                 _versionTable, _scriptsRunTable, _scriptsRunErrorTable, _warnOnOneTimeScriptChanges,
 				_runAfterOtherAnytimeScriptsFolderName, _runAfterCreateDatabaseScriptsFolderName, _outputPath);
 
